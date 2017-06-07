@@ -1,0 +1,62 @@
+html {
+    height: 100%;
+    min-height: 100%;
+    font-family: $font-default;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    background: $body-bg;
+}
+
+.btn-red-default {
+    background: $red-default;
+    color:$white;
+
+    &:hover, &:active {
+        background-color: $red-dark-default;
+        color: $white;
+        transition: .3s all;
+    }
+}
+
+.btn-red-dark-default {
+    background: $red-dark-default;
+    color:$white;
+
+    &:hover, &:active {
+        background-color: $red-default;
+        color: $white;
+        transition: .3s all;
+    }
+}
+
+
+.upper{
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+.subtitle {
+    padding: 0 0 1em;
+    display: block;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.block {
+    display: block;
+}
+
+.form-control {
+    &:active, &:focus, &:hover{
+        box-shadow: none;
+        border-color: $font-color-default;
+    }
+}
