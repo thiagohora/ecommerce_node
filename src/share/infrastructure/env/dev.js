@@ -7,7 +7,7 @@ import layout from 'express-ejs-layouts';
 import express from 'express';
 import expressSession from 'express-session';
 import passport from 'passport';
-import Customer from 'account/schema/customer';
+import User from 'share/infrastructure/security/schema/User';
 import mongoose from 'mongoose';
 import { Strategy } from 'passport-local';
 
@@ -49,9 +49,9 @@ export default (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    passport.use(new Strategy(Customer.authenticate()));
-    passport.serializeUser(Customer.serializeUser());
-    passport.deserializeUser(Customer.deserializeUser());
+    passport.use(new Strategy(User.authenticate()));
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
 
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost:27017/ecommerce');

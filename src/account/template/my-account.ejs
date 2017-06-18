@@ -8,7 +8,7 @@
            </div>
 
            <div class="col-xs-12">
-               <form action="/account/:id?_method=PUT" method="POST">
+               <form action="/account/<%= user._id %>?_method=PUT" method="POST">
                     <% include partial/form_new %>
                </form>
            </div>

@@ -1,24 +1,35 @@
-import Customer from 'account/schema/customer';
+import CustomerRepo from 'account/infrastructure/repository/CustomerRepo';
+import Customer from 'account/domain/Customer';
+
+const repository = new CustomerRepo();
+
+function showForm(res, customer, user = null) {
+    const page = user ? 'account/template/my-account' : 'account/template/new'; 
+    return res.render(page, {
+        title: 'My account',
+        customer,
+        layout: 'share/template/main/index',
+        user
+    });
+}
 
 export default (req, res) => {
-    Customer.findOne({
-        slug: req.params.slug
-    })
-    .then(customer => {
-        if(!customer) {
+   
+    if (!req.user) {
+        return showForm(res, new Customer());
+    }
+
+    if(req.user.slug !== req.params.slug) {
+        return res.redirect(`/account/${req.user.slug}`);
+    }
+
+    repository.findOne({ slug : req.params.slug }).then(optCustomer => {
+
+        if(!optCustomer.isPresent()) {
             return res.redirect('/');
         }
 
-        const customer_view = customer.toObject();
-        customer_view.birthday = `${customer_view.birthday.day}/${customer_view.birthday.month}/${customer_view.birthday.year}`;
+        return showForm(res, optCustomer.get(), req.user);
 
-        return res.render('account/template/my-account', {
-            title: 'My account',
-            customer: customer_view,
-            layout: 'share/template/main/index'
-        });
-    })
-    .catch(error => {
-        return '';
-    });
+    }).catch(error => res.redirect('/'));
 };

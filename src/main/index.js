@@ -6,7 +6,7 @@ router.get('/',(req, res) => {
     res.render('main/template/index', {
         title: 'Main Page',
         layout: 'share/template/promo/index',
-        user: req.user || undefined
+        user: req.user || null
     });
 });
 

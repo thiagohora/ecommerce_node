@@ -1,25 +1,21 @@
-import Customer from 'account/schema/customer';
+import User from 'share/infrastructure/security/schema/User';
 
 export default (req, res) => {
-    console.error("login init");
-    console.error(req.body);
     
-    Customer.authenticate(req.body.email, req.body.password, (error, user, opts) => {
-        
-        console.error("login req", user, error);
+    const authenticate = User.authenticate();
 
+    authenticate(req.body.email, req.body.password, (error, user, opts) => {
+       
         if(error || user === false) {
-            console.error("error ", error);
+            console.log(error || user);
             return res.redirect('/account');
         }
 
-         console.error("call login");
         return req.login(user, (error) => {
             if(error) {
-                console.error("error ", error);
+                console.log(error);
                 return res.redirect('/account');
             }
-            console.error(user);
             return res.redirect('/');
         });
     });

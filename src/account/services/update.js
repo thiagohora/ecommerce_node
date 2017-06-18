@@ -7,7 +7,7 @@ export default (req, res) => {
     
     const customer = new Customer(req.body); 
     
-    return repository.save(customer)
+    return repository.update(Object.assign(customer, { _id: req.user._id }))
                 .then(() => res.redirect('/account'))
                 .catch((error) =>{ console.error(error); return res.redirect('/'); });
 };

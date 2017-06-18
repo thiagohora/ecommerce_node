@@ -1,30 +1,20 @@
 import { Router } from 'express';
-import Customer from 'account/schema/customer';
+import ValidateLogin from 'account/services/validateLogin';
 
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/', require('account/services/index').default);
 
-    console.log(req.user);
-    return res.render('account/template/index', {
-        title: 'Account ',
-        layout: 'share/template/main/index',
-        user: req.user || undefined
-    });
-});
+router.get('/new', require('account/services/show').default);
 
-router.get('/new', (req, res) => {
-    return res.render('account/template/new', {
-        title: 'Account ',
-        customer: new Customer(),
-        layout: 'share/template/main/index'
-    });
-});
+router.get('/logout', ValidateLogin, require('account/services/logout').default);
+
+router.get('/:slug', ValidateLogin, require('account/services/show').default);
 
 router.post('/new', require('account/services/create').default);
 
-router.get('/:slug', require('account/services/login').default);
+router.put('/:id', ValidateLogin, require('account/services/update').default);
 
-router.post('/login', require('account/services/show').default);
+router.post('/login', require('account/services/login').default);
 
 export default router;
