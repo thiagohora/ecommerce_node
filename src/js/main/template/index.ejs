@@ -1,0 +1,108 @@
+<%- contentFor('body') %>
+<section id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 col-lg-3 category">
+                <h4 class="title upper bold">Category</h4>
+                <ul class="list-group">
+                    <% for (var i = 0; i < categories.length; i++) { %>
+                        <li class="list-group-item">
+                            <a href="/category/<%= categories[i].slug %>"><%= categories[i].name %></a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 list-prod">
+                <h4 class="title bold">Best sellers</h4>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4 product_item">
+                        <div class="preview">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" class="img-responsive" alt="" />
+                        </div>
+                        <div class="info">
+                            <a href="/product/product-1">Item 1</a>
+                            <div class="price">
+                                <strong>$ 30,00</strong>
+                                <a href="/product/product-1" class="btn btn-red-default">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xs-12 col-md-4 product_item">
+                        <div class="preview">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" class="img-responsive" alt="" />
+                        </div>
+                        <div class="info">
+                            <a href="/product/product-2">Item 1</a>
+                            <div class="price">
+                                <strong>$ 30,00</strong>
+                                <a href="/product/product-1" class="btn btn-red-default">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xs-12 col-md-4 product_item">
+                        <div class="preview">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" class="img-responsive" alt="" />
+                        </div>
+                        <div class="info">
+                            <a href="/product/product-3">Item 1</a>
+                            <div class="price">
+                                <strong>$ 30,00</strong>
+                                <a href="/product/product-1" class="btn btn-red-default">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xs-12 col-md-4 product_item">
+                        <div class="preview">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" class="img-responsive" alt="" />
+                        </div>
+                        <div class="info">
+                            <a href="/product/product-4">Item 1</a>
+                            <div class="price">
+                                <strong>$ 30,00</strong>
+                                <a href="/product/product-1" class="btn btn-red-default">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xs-12 col-md-4 product_item">
+                        <div class="preview">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" class="img-responsive" alt="" />
+                        </div>
+                        <div class="info">
+                            <a href="/product/product-5">Item 1</a>
+                            <div class="price">
+                                <strong>$ 30,00</strong>
+                                <a href="/product/product-1" class="btn btn-red-default">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="line"></section>
+
+<section id="steps">
+    <div class="container">
+        <div class="row">
+            <h4 class="title upper bold">Why?</h4>
+            <div class="col-xs-12 col-md-4 step">
+                <i class="fa fa-list one"></i>
+                <h4 class="upper bold">Title</h4>
+                <p class="bold">Text</p>
+            </div>
+            <div class="col-xs-12 col-md-4 step">
+                <i class="fa fa-truck two"></i>
+                <h4 class="upper bold">Title</h4>
+                <p class="bold">Text</p>
+            </div>
+            <div class="col-xs-12 col-md-4 step">
+                <i class="fa fa-heart three"></i>
+                <h4 class="upper bold">Title</h4>
+                <p class="bold"z >Text</p>
+            </div>
+            <div class="col-xs-12 col-md-4 step"></div>
+        </div>
+    </div>
+</section>

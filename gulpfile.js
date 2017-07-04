@@ -8,7 +8,7 @@ const sass = require('gulp-sass');
 const changed = require('gulp-changed');
 
 const paths = {
-    html: 'src/**/template/',
+    html: 'src/js/**/template/',
     sass: './public/scss',
     js: './public/js',
     img: './public/img',

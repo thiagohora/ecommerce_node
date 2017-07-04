@@ -1,0 +1,60 @@
+<header id="header" class="no-height">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 text-center logo">
+                <a href="/" title="Node Shop - Home"><img src="/img/logo2.png" alt="node shop" class="img-responsive" /></a>
+            </div>
+            <div class="col-xs-12 col-md-5 col-md-offset-4 text-right account">
+                <div class="row">
+                    <div class="btn-group" role="group">
+                        <% if (user) { %>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-red-default upper dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-user"></i>
+                                    <%= user.name %>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/account/<%= user.slug %>"> Perfil</a></li>
+                                    <li><a href="/account/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        <% } else { %>
+                            <a href="/account" class="btn btn-default btn-red-default upper">
+                                entrar / registrar
+                            </a>
+                        <% } %>
+
+                        <a href="#" class="btn btn-default btn-red-default shopping upper">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <% for (var i = 0; i < categories.length; i++) { %>
+                            <li>
+                                <a href="/category/<%= categories[i].slug %>"><%= categories[i].name %></a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>

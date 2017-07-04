@@ -1,11 +1,12 @@
 import express from 'express';
 import path from 'path';
-import App from './src/app';
+import './src/resource';
+import App from './src/js/app';
 
 const app = express();
 const env = process.env.NODE_ENV || 'dev';
 
-const EnvConfig = require(`./src/share/infrastructure/env/${env}.js`).default;
+const EnvConfig = require(`share/infrastructure/env/${env}.js`).default;
 
 EnvConfig(app);
 App(app);
