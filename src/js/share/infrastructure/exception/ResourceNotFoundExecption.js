@@ -1,5 +1,7 @@
 class ResourceNotFoundExecption extends Error {
-    constructor(name) {
-        super(`Resource ${name} not found!`);
+    constructor(message) {
+        super(message);
     }
 }
+
+export default ResourceNotFoundExecption;

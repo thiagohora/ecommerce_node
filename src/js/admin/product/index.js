@@ -6,15 +6,15 @@ import uploadS3 from 'admin/infrastructure/aws/config'
 const service = new ProductServ();
 const categoryService = new CategoryServ();
 
-export default function (router) {
+export default function (router, isLoggedIn) {
 
-    router.delete('/product/:id', (req, res) => {
+    router.delete('/product/:id', isLoggedIn, (req, res) => {
         return service.delete(Object.assign({}, new Product(req.body), { id: req.params.id }))
                     .then(() => res.redirect('/admin/product'))
                     .catch(() => res.redirect(`/admin/product`));
     });
 
-    router.get('/product', (req, res) => {
+    router.get('/product', isLoggedIn, (req, res) => {
         return service.getAll().then(optProducts => {
             return res.render('admin/product/template/show', {
                 title: 'Product',
@@ -25,7 +25,7 @@ export default function (router) {
         }).catch(() => res.redirect('/admin'));
     });
 
-    router.get('/product/new', (req, res) => {
+    router.get('/product/new', isLoggedIn, (req, res) => {
         return categoryService.getAllEnable()
             .then(optCategories => res.render('admin/product/template/new', {
                                         title: 'Product',
@@ -37,7 +37,7 @@ export default function (router) {
             .catch((e) => { console.log(e); return res.redirect('/admin'); });
     });
 
-    router.get('/product/edit/:id', (req, res) => {
+    router.get('/product/edit/:id', isLoggedIn, (req, res) => {
         service.findById(req.params.id).then(product => {
             return categoryService.getAllEnable()
                     .then(optCategories => res.render('admin/product/template/edit', {
@@ -51,7 +51,7 @@ export default function (router) {
         }).catch(() => res.redirect('/admin'));
     });
 
-    router.post('/product', uploadS3.array('image', 1), (req, res) => {
+    router.post('/product', isLoggedIn, uploadS3.array('image', 1), (req, res) => {
         
         const product = new Product(req.body);
         
@@ -64,7 +64,7 @@ export default function (router) {
                         .catch(error => { console.log(error); return res.redirect('/admin/product/new'); });
     });
 
-    router.put('/product/:id', /*uploadS3.array('image', 1),*/ (req, res) => {
+    router.put('/product/:id', isLoggedIn, uploadS3.array('image', 1), (req, res) => {
 
         const product = Object.assign({}, new Product(req.body), { id: req.params.id })
         

@@ -11,6 +11,18 @@ class CategoryServ {
                         .catch(reject);
         });
     }
+
+    findOne(category) {
+        return new Promise((resolve, reject) => {
+            return repository.findOne(category)
+                        .then(optCategory => {
+                            if(!optCategory.isPresent())
+                                return reject(new ResourceNotFoundExecption(`Category: ${category} not found`));
+                            return resolve(optCategory.get());
+                        })
+                        .catch(reject);
+        });
+    }
 }
 
 export default CategoryServ;

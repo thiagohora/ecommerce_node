@@ -30,6 +30,14 @@ class CategoryRepo {
         });
     }
 
+    findOne(category) {
+        return new Promise((resolve, reject) => {
+            return Category.findOne(category).then(category => { 
+                return resolve(Optional.ofNullable(category));
+            }).catch(reject);
+        });
+    }
+
     save(category) {
         return new Promise((resolve, reject) => {
             return Category.create(Object.assign({}, category, { slug: slugfy(category.name) }))
