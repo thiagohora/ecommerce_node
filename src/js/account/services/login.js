@@ -7,7 +7,7 @@ export default (req, res) => {
     authenticate(req.body.email, req.body.password, (error, user, opts) => {
        
         if(error || user === false) {
-            console.log(error || user);
+            console.log(error | user);
             return res.redirect('/account');
         }
 

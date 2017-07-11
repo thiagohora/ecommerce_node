@@ -5,7 +5,6 @@ const router = Router();
 const service = new ProductServ();
 
 router.get('/:slug', (req, res) => {
-    console.log(res.locals.cart.count);
     return service.findOne(Object.assign({}, req.params))
                     .then(product => res.render('product/item/template/show', {
                         title: 'Product',

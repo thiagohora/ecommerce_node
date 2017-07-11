@@ -6,26 +6,40 @@ const service = new CartServ();
 const router = Router();
 
 router.post('/', (req, res) => {
-   return service.save(new CartVO(req.body.productId, req.user))
+    if(req.session.cart_id) {
+        return service.addProduct(req.session.cart_id, req.body.productId).then(cart => {
+            return res.redirect(`/product/${req.body.slug}`)
+        }).catch((e) => { console.log(e); return res.redirect(`/`); });
+    }
+    return service.save(new CartVO(req.body.productId, req.user)).then(cart => {
+        req.session.cart_id = cart._id;
+        return res.redirect(`/product/${req.body.slug}`)
+    }).catch((e) => { console.log(e); return res.redirect(`/`); });
+});
+
+router.delete('/:id', (req, res) => {
+   return service.findById(req.params.id)
                     .then(cart => {
-                        req.session.cart_id = cart._id;
-                        return res.redirect(`/product/${req.body.slug}`)
+                        cart.products.pull({  _id: req.query.product_id });
+                        cart.save();
+                        if(!cart.products.length) {
+                            return res.redirect('/');    
+                        }
+                        return res.redirect(`/cart/${req.params.id}`)
                     })
                     .catch((e) => { console.log(e); return res.redirect(`/`); });
 });
 
 router.get('/:id', (req, res) => {
-   return service.findById(req.params.id)
-                    .then(cart =>  {
-                        console.log(cart);
-                        return res.render('product/cart/template/show', {
-                                    title: 'Cart',
-                                    layout: 'share/template/main/index',
-                                    user: req.user || null,
-                                    cart
-                                });
-                    })
-                    .catch((e) => { console.log(e); return res.redirect(`/`); });
+    if(!res.locals.cart || !res.locals.cart.products || res.locals.cart.products.length == 0) {
+        return res.redirect('/');
+    }
+
+    return res.render('product/cart/template/show', {
+        title: 'Cart',
+        layout: 'share/template/main/index',
+        user: req.user || null
+    });
 });
 
 export default router;

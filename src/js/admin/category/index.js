@@ -6,7 +6,6 @@ const service = new CategoryServ();
 export default function (router, isLoggedIn) {
 
     router.delete('/category/:id', isLoggedIn, (req, res) => {
-        console.log("ok");
         return service.delete(Object.assign({}, new Category(req.body), { id: req.params.id }))
                     .then(() => res.redirect('/admin/category'))
                     .catch(() => res.redirect(`/admin/category`));

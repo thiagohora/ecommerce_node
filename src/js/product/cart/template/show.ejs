@@ -13,15 +13,17 @@
                                       <tr>
                                           <th>Product</th>
                                           <th>Value</th>
+                                          <th>quantity</th>
                                           <th>Actions</th>
                                       </tr>
                                       <tbody>
                                           <% for(var i = 0; i < cart.products.length; i++) { %>
                                             <tr>
                                                 <td><%= cart.products[i].product.name %></td>
-                                                <td><%= cart.products[i].product.sales_price %></td>
+                                                <td>R$<%= cart.products[i].product.sales_price %></td>
+                                                 <td><%= cart.products[i].quantity %></td>
                                                 <td>
-                                                    <form action="" class="inline">
+                                                    <form action="/cart/<%= cart._id %>?product_id=<%= cart.products[i]._id %>&_method=DELETE" method="POST" class="inline">
                                                         <button type="submit" class="btn btn-danger btn-small">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
@@ -33,6 +35,7 @@
                                   </thead>
                               </table>
                           </div>
+                          <h4>Total amount - R$<%= cart.total %></h4>
                       </div>
                 </div>
             </div>
