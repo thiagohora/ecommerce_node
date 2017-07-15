@@ -2,5 +2,10 @@
     "AWS" : {
         "secretAccessKey" : "",
         "accessKeyId" : ""   
+    },
+    "PagSeguro" : {
+        "user": "",
+        "token": "",
+        "mode": ""
     }
 }

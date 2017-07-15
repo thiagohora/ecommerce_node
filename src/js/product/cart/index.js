@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import CartVO from 'product/cart/domain/CartVO';
 import CartServ from 'product/cart/service/CartServ';
+import UrlUtils from 'share/utils/url'
 
 const service = new CartServ();
 const router = Router();
@@ -41,5 +42,21 @@ router.get('/:id', (req, res) => {
         user: req.user || null
     });
 });
+
+
+router.post('/order', (req, res) => {
+    return service.finish(req.body.cart_id, UrlUtils.mountRedirect(req, '/cart/order/finished'))
+            .then(url => res.redirect(url))
+            .catch(e => {
+                console.log(e);
+                res.redirect('/');
+            });
+});
+
+router.get('/order/finished', (req, res) => res.render('product/cart/template/finished', {
+                                                title: 'Thanks',
+                                                layout: 'share/template/main/index',
+                                                user: req.user || null
+                                            }));
 
 export default router;
